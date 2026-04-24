@@ -4,10 +4,11 @@ import styles from "@/styles/modules/Properties.module.css";
 import Link from "next/link";
 import { useState, useEffect, Suspense } from "react";
 import PropertyModal from "@/components/dashboard/PropertyModal";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 function PropertiesContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editProperty, setEditProperty] = useState<any>(null);
 
@@ -17,6 +18,13 @@ function PropertiesContent() {
       setIsModalOpen(true);
     }
   }, [searchParams]);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setEditProperty(null);
+    // Remove query params from URL
+    router.replace('/admin/properties', { scroll: false });
+  };
 
   const [properties, setProperties] = useState([
     {
@@ -91,10 +99,7 @@ function PropertiesContent() {
     <div className={styles.container}>
       <PropertyModal 
         isOpen={isModalOpen} 
-        onClose={() => {
-          setIsModalOpen(false);
-          setEditProperty(null);
-        }} 
+        onClose={handleCloseModal} 
         onSave={handleSaveProperty} 
         editData={editProperty}
       />
