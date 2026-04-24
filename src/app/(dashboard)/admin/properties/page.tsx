@@ -2,11 +2,11 @@
 
 import styles from "@/styles/modules/Properties.module.css";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import PropertyModal from "@/components/dashboard/PropertyModal";
 import { useSearchParams } from "next/navigation";
 
-export default function PropertiesPage() {
+function PropertiesContent() {
   const searchParams = useSearchParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editProperty, setEditProperty] = useState<any>(null);
@@ -226,5 +226,19 @@ export default function PropertiesPage() {
         </table>
       </div>
     </div>
+  );
+}
+
+export default function PropertiesPage() {
+  return (
+    <Suspense fallback={
+      <div className="d-flex justify-content-center align-items-center min-vh-100">
+        <div className="spinner-border text-emerald" role="status">
+          <span className="visually-hidden">Loading Properties...</span>
+        </div>
+      </div>
+    }>
+      <PropertiesContent />
+    </Suspense>
   );
 }
