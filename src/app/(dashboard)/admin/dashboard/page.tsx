@@ -1,112 +1,115 @@
 "use client";
 
+import styles from "@/styles/modules/Dashboard.module.css";
 import Link from "next/link";
 
 export default function DashboardPage() {
   const stats = [
-    { label: "Offices", value: "12", sub: "+2 this month", subColor: "text-success", icon: "bi-building", bg: "bg-primary" },
-    { label: "Units", value: "48", sub: "+5 this month", subColor: "text-success", icon: "bi-buildings", bg: "bg-success" },
-    { label: "Watchmen", value: "24", sub: "20 on duty", subColor: "text-primary", icon: "bi-eye", bg: "bg-warning" },
-    { label: "Visitors Today", value: "156", sub: "+12% vs yesterday", subColor: "text-success", icon: "bi-people", bg: "bg-info" },
+    { label: "Total Properties", value: "24", trend: "+2 this month", trendUp: true, icon: "bi-building", color: "var(--primary)" },
+    { label: "Active Units", value: "1,248", trend: "+45 this month", trendUp: true, icon: "bi-grid-3x3-gap", color: "#3B82F6" },
+    { label: "Visitors Today", value: "382", trend: "-5% vs yesterday", trendUp: false, icon: "bi-people", color: "#8B5CF6" },
+    { label: "SLA Adherence", value: "98.4%", trend: "+1.2% vs last week", trendUp: true, icon: "bi-check-circle", color: "#10B981" },
   ];
 
-  const recentVisitors = [
-    { name: "Ankit Sharma", location: "Block A-204 · Tech Park Tower", time: "10:32 AM", status: "Inside" },
-    { name: "Priya Singh", location: "Block B-102 · Business Hub", time: "10:15 AM", status: "Inside" },
-    { name: "Rahul Verma", location: "Block A-301 · Tech Park Tower", time: "09:48 AM", status: "Checked Out" },
-    { name: "Sneha Gupta", location: "Block C-105 · Enterprise Centre", time: "09:30 AM", status: "Inside" },
-  ];
-
-  const quickActions = [
-    { label: "Add Office", desc: "Register new property", icon: "bi-plus-lg", href: "/admin/offices" },
-    { label: "Manage Watchmen", desc: "View and assign", icon: "bi-person-plus", href: "/admin/watchmen" },
-    { label: "Visitor Logs", desc: "Today's entries", icon: "bi-card-list", href: "/admin/visitors" },
+  const criticalIssues = [
+    { id: "T-892", subject: "Main Gate Scanner Malfunction", priority: "Critical", status: "Open", assigned: "Rahul V." },
+    { id: "T-895", subject: "CCTV Blind Spot - Block B", priority: "High", status: "In Progress", assigned: "Ankit S." },
   ];
 
   return (
-    <div className="container-fluid py-2">
-      {/* Stats Row */}
-      <div className="row g-4 mb-4">
+    <div className={styles.dashboard}>
+      {/* Top Stats Grid */}
+      <div className={styles.statsGrid}>
         {stats.map((stat, idx) => (
-          <div className="col-md-6 col-lg-3" key={idx}>
-            <div className="card border rounded-3 h-100 p-4 bg-white position-relative overflow-hidden">
-              <i className="bi bi-graph-up-arrow position-absolute top-0 end-0 m-3 text-success opacity-50"></i>
-              <div className={`${stat.bg} bg-opacity-10 text-${stat.bg.replace('bg-', '')} rounded d-flex align-items-center justify-content-center mb-3`} style={{ width: '40px', height: '40px' }}>
-                <i className={`bi ${stat.icon} fs-5`}></i>
+          <div className={styles.statCard} key={idx}>
+            <div className={styles.statHeader}>
+              <div className={styles.statIcon} style={{ backgroundColor: `${stat.color}15`, color: stat.color }}>
+                <i className={`bi ${stat.icon}`}></i>
               </div>
-              <h2 className="fw-bold mb-1">{stat.value}</h2>
-              <p className="text-muted small fw-medium mb-2">{stat.label}</p>
-              <p className={`small mb-0 fw-medium ${stat.subColor}`}>{stat.sub}</p>
+              <span className={`${styles.statTrend} ${stat.trendUp ? "text-success" : "text-danger"}`}>
+                <i className={`bi bi-graph-${stat.trendUp ? "up" : "down"}`}></i>
+                {stat.trend}
+              </span>
             </div>
+            <p className={styles.statLabel}>{stat.label}</p>
+            <h3 className={styles.statValue}>{stat.value}</h3>
           </div>
         ))}
       </div>
 
-      <div className="row g-4">
-        {/* Recent Visitors */}
-        <div className="col-lg-8">
-          <div className="card border rounded-3 bg-white h-100">
-            <div className="card-header bg-white border-bottom-0 p-4 d-flex justify-content-between align-items-center">
-              <div>
-                <h5 className="mb-0 fw-bold">Recent Visitors</h5>
-                <p className="text-muted small mb-0">Across all buildings</p>
-              </div>
-              <Link href="/admin/visitors" className="btn btn-link text-decoration-none fw-medium p-0">View all &rarr;</Link>
+      <div className={styles.mainGrid}>
+        {/* Recent Operations Panel */}
+        <div className={styles.panel}>
+          <div className={styles.panelHeader}>
+            <h5 className={styles.panelTitle}>Operational Intelligence</h5>
+            <div className="d-flex gap-2">
+              <button className="btn btn-outline-light border text-dark btn-sm rounded-pill">Export PDF</button>
+              <button className="btn btn-primary btn-sm rounded-pill">View All</button>
             </div>
-            <div className="card-body p-0">
-              <ul className="list-group list-group-flush">
-                {recentVisitors.map((visitor, idx) => (
-                  <li className="list-group-item p-4 border-light d-flex align-items-center justify-content-between" key={idx}>
-                    <div className="d-flex align-items-center gap-3">
-                      <div className="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center" style={{ width: '40px', height: '40px' }}>
-                        <i className="bi bi-person fs-5"></i>
-                      </div>
-                      <div>
-                        <p className="mb-0 fw-bold text-dark">{visitor.name}</p>
-                        <p className="mb-0 text-muted small">{visitor.location}</p>
-                      </div>
-                    </div>
-                    <div className="text-end">
-                      <p className="mb-1 fw-bold text-dark small">{visitor.time}</p>
-                      <span className={`badge ${visitor.status === 'Inside' ? 'bg-success bg-opacity-10 text-success' : 'bg-secondary bg-opacity-10 text-secondary'} rounded-pill fw-medium`}>
-                        {visitor.status}
-                      </span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+          </div>
+          <div className={styles.panelBody}>
+            <div className={styles.tableContainer}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th className={styles.th}>Ticket ID</th>
+                    <th className={styles.th}>Issue Subject</th>
+                    <th className={styles.th}>Priority</th>
+                    <th className={styles.th}>Status</th>
+                    <th className={styles.th}>Assigned To</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {criticalIssues.map((issue) => (
+                    <tr key={issue.id}>
+                      <td className={styles.td}><span className="fw-bold text-primary">{issue.id}</span></td>
+                      <td className={styles.td}>{issue.subject}</td>
+                      <td className={styles.td}>
+                        <span className={`badge bg-${issue.priority === 'Critical' ? 'danger' : 'warning'} bg-opacity-10 text-${issue.priority === 'Critical' ? 'danger' : 'warning'} rounded-pill`}>
+                          {issue.priority}
+                        </span>
+                      </td>
+                      <td className={styles.td}>{issue.status}</td>
+                      <td className={styles.td}>{issue.assigned}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
 
-        {/* Quick Actions & System Status */}
-        <div className="col-lg-4 d-flex flex-column gap-4">
-          <div>
-            <h6 className="fw-bold mb-3">Quick Actions</h6>
-            <div className="d-flex flex-column gap-3">
-              {quickActions.map((action, idx) => (
-                <Link href={action.href} key={idx} className="text-decoration-none">
-                  <div className="card border flex-row align-items-center p-3 rounded-3 hover-bg-light transition-colors">
-                    <div className="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '40px', height: '40px' }}>
-                      <i className={`bi ${action.icon}`}></i>
-                    </div>
-                    <div className="flex-grow-1">
-                      <p className="mb-0 fw-bold text-dark">{action.label}</p>
-                      <p className="mb-0 text-muted small">{action.desc}</p>
-                    </div>
-                    <i className="bi bi-chevron-right text-muted"></i>
-                  </div>
-                </Link>
-              ))}
+        {/* System Health / Quick Insights */}
+        <div className="d-flex flex-column gap-4">
+          <div className={styles.panel} style={{ background: 'linear-gradient(135deg, var(--primary-dark) 0%, #065F46 100%)' }}>
+            <div className="p-4 text-white">
+              <div className="d-flex align-items-center gap-3 mb-3">
+                <div className="bg-white bg-opacity-20 rounded-circle p-2">
+                  <i className="bi bi-shield-check fs-4"></i>
+                </div>
+                <h5 className="mb-0 fw-bold">Platform Status</h5>
+              </div>
+              <p className="text-white text-opacity-75 small mb-4">All global regions are currently operational. No active breaches reported.</p>
+              <div className="d-flex justify-content-between align-items-center bg-white bg-opacity-10 rounded-pill p-2 px-3">
+                <span className="small fw-medium">Active Watchmen</span>
+                <span className="badge bg-white text-dark rounded-pill">1,240</span>
+              </div>
             </div>
           </div>
 
-          <div className="card border-0 bg-blue-gradient text-white rounded-3 p-4 mt-auto">
-            <div className="d-flex align-items-center gap-3 mb-2">
-              <i className="bi bi-activity fs-3"></i>
-              <h5 className="mb-0 fw-bold">System Healthy</h5>
+          <div className={styles.panel}>
+            <div className="p-4">
+              <h6 className="fw-bold mb-3">Global Occupancy</h6>
+              <div className="d-flex align-items-center gap-3 mb-3">
+                <div className="flex-grow-1">
+                  <div className="progress" style={{ height: '8px' }}>
+                    <div className="progress-bar bg-primary" style={{ width: '82%' }}></div>
+                  </div>
+                </div>
+                <span className="small fw-bold">82%</span>
+              </div>
+              <p className="text-muted small mb-0">Total capacity across all managed buildings worldwide.</p>
             </div>
-            <p className="mb-0 text-white-50 small">All offices reporting normally.</p>
           </div>
         </div>
       </div>

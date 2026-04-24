@@ -30,18 +30,19 @@ export default function Features() {
     {
       icon: "bi-shield-lock",
       title: "Role-based access",
-      description: "Give specific permissions to super admins, office owners, and watchmen based on their needs."
+      description: "Give specific permissions to super admins and office owners based on their needs."
     }
   ];
 
   return (
-    <section id="features" className="py-5 bg-white">
+    <section id="features" className="py-5 bg-white overflow-hidden">
       <div className="container py-5">
         <div className="text-center mb-5">
-          <h2 className="display-6 fw-bold">Everything you need to run office security</h2>
-          <p className="lead text-muted max-w-md mx-auto">Powerful features wrapped in an easy-to-use interface.</p>
+          <span className="text-emerald fw-bold text-uppercase mb-2 d-block" style={{ fontSize: '0.65rem', letterSpacing: '0.2rem' }}>Capabilities</span>
+          <h2 className="fw-bold text-dark mb-2" style={{ letterSpacing: '-0.02em', fontSize: '1.75rem' }}>The Security Command Suite</h2>
+          <p className="text-muted mx-auto" style={{ maxWidth: '500px', fontSize: '0.9rem' }}>High-performance tools engineered for global property oversight and rapid security response.</p>
         </div>
-        <div className="row">
+        <div className="row g-4">
           {features.map((feature, index) => (
             <FeatureCard key={index} {...feature} />
           ))}

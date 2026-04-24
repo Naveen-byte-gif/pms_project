@@ -2,49 +2,45 @@
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
 :root {
-  /* User Requested Color Palette */
+  /* Enterprise SaaS Color Palette (Refined) */
   --primary: #10B981;
-  --secondary: #34D399;
-  --bg: #ECFDF5;
-  --text: #064E3B;
-
-  /* Brand Colors (Mapped to new theme) */
-  --color-primary: var(--primary);
-  --color-primary-dark: #059669; /* Darker Emerald for gradients */
-  --color-primary-hover-start: #059669;
-  --color-primary-hover-end: #047857;
+  --primary-dark: #064E3B;
+  --primary-light: #D1FAE5;
+  --secondary: #64748B; /* Slate for secondary text/icons */
+  --bg-app: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --border-color: #E2E8F0;
+  --text-main: #0F172A;
+  --text-muted: #64748B;
   
-  /* Background & Text Colors */
-  --color-bg-light: var(--bg);
-  --color-bg-white: #ffffff;
-  --color-text-main: var(--text);
+  /* Shadows (Enterprise Standard) */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-premium: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
 
-  /* Shadows & Effects */
-  --color-shadow-light: rgba(6, 78, 59, 0.05);
-  --color-shadow-medium: rgba(6, 78, 59, 0.08);
-  --color-shadow-dark: rgba(6, 78, 59, 0.1);
-  --color-border-light: rgba(6, 78, 59, 0.08);
-  
-  /* Dashboard Specific */
-  --color-bg-dashboard: var(--bg);
-  --color-sidebar-active: var(--primary);
-  --color-badge-success-bg: #dcfce7;
-  --color-badge-success-text: #166534;
-  --color-badge-neutral-bg: #f1f3f4;
-  --color-badge-neutral-text: #5f6368;
-  --color-badge-warning-bg: #fef7e0;
-  --color-badge-warning-text: #f29900;
-  
-  /* Translucent Colors */
-  --color-primary-alpha-5: rgba(16, 185, 129, 0.05);
-  --color-primary-alpha-30: rgba(16, 185, 129, 0.3);
-  --color-white-alpha-40: rgba(255, 255, 255, 0.4);
+  /* Spacing (8px Grid) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
 
-  /* Bootstrap Overrides & Utilities */
-  --bs-primary: var(--color-primary);
-  --bs-primary-rgb: 16, 185, 129;
-  --custom-blue-gradient: linear-gradient(135deg, var(--color-primary) 0%, var(--secondary) 100%);
-  --custom-blue-gradient-hover: linear-gradient(135deg, var(--color-primary-hover-start) 0%, var(--color-primary-hover-end) 100%);
+  /* Border Radius */
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Bootstrap Overrides */
+  --bs-primary: var(--primary);
+  --bs-body-bg: var(--bg-app);
+  --bs-body-color: var(--text-main);
+  --bs-font-sans-serif: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 body {

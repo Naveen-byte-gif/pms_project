@@ -1,63 +1,54 @@
+"use client";
+
 export default function Roles() {
   const roles = [
     {
-      title: "Super Admin",
-      description: "Complete control over the entire system and billing.",
+      title: "Global Executive",
+      description: "Full oversight of portfolio security and system-wide intelligence.",
       icon: "bi-shield-check",
       features: [
-        "Manage all buildings",
-        "Billing & subscriptions",
-        "Global analytics",
-        "System settings"
+        "Portfolio orchestration",
+        "Subscription lifecycle",
+        "Unified data intelligence",
+        "Global protocol config"
       ]
     },
     {
-      title: "Office Owner",
-      description: "Manage specific offices within a building.",
-      icon: "bi-briefcase-fill",
+      title: "Asset Director",
+      description: "Operational management of specific office nodes and security layers.",
+      icon: "bi-briefcase",
       features: [
-        "View office visitors",
-        "Pre-register guests",
-        "Receive arrival alerts",
-        "Manage employees"
-      ]
-    },
-    {
-      title: "Watchman",
-      description: "Streamlined interface for lobby operations.",
-      icon: "bi-person-badge",
-      features: [
-        "Fast visitor entry",
-        "ID verification",
-        "Emergency alerts",
-        "Shift management"
+        "Node-specific monitoring",
+        "Rapid visitor onboarding",
+        "Encrypted arrival logs",
+        "Personnel management"
       ]
     }
   ];
 
   return (
-    <section className="py-5 bg-white">
-      <div className="container py-5">
-        <div className="text-center mb-5">
-          <h2 className="display-6 fw-bold">One platform, three optimized roles</h2>
+    <section className="py-2 bg-white">
+      <div className="container py-4">
+        <div className="text-center mb-4">
+          <h2 className="fw-bold text-dark" style={{ letterSpacing: '-0.02em', fontSize: '1.5rem' }}>Strategic Permissions</h2>
         </div>
         
         <div className="row g-4 justify-content-center">
           {roles.map((role, index) => (
             <div className="col-lg-4 col-md-6" key={index}>
-              <div className="card h-100 border-0 custom-shadow rounded-xl hover-lift p-4">
+              <div className="card h-100 border-0 shadow-sm p-4" style={{ borderRadius: '1.25rem' }}>
                 <div className="d-flex align-items-center mb-3">
-                  <div className="bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '48px', height: '48px' }}>
-                    <i className={`bi ${role.icon} fs-4`}></i>
+                  <div className="text-emerald d-flex align-items-center justify-content-center me-3" style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.08)' }}>
+                    <i className={`bi ${role.icon} fs-5`}></i>
                   </div>
-                  <h4 className="fw-bold mb-0">{role.title}</h4>
+                  <h6 className="fw-bold mb-0 text-dark" style={{ fontSize: '1rem' }}>{role.title}</h6>
                 </div>
-                <p className="text-muted mb-4">{role.description}</p>
+                <p className="text-muted mb-4" style={{ fontSize: '0.85rem', lineHeight: '1.5' }}>{role.description}</p>
                 <ul className="list-unstyled mb-0">
                   {role.features.map((feature, idx) => (
                     <li className="mb-2 d-flex align-items-center" key={idx}>
-                      <i className="bi bi-check-circle-fill text-success me-2"></i>
-                      <span className="fw-medium text-dark">{feature}</span>
+                      <i className="bi bi-check2 text-emerald me-2 fw-bold" style={{ fontSize: '0.9rem' }}></i>
+                      <span className="fw-medium text-dark" style={{ fontSize: '0.85rem' }}>{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -66,6 +57,9 @@ export default function Roles() {
           ))}
         </div>
       </div>
+      <style jsx>{`
+        .text-emerald { color: #10B981 !important; }
+      `}</style>
     </section>
   );
 }

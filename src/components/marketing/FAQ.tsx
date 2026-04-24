@@ -1,11 +1,6 @@
 export default function FAQ() {
   const faqs = [
     {
-      id: "faq1",
-      question: "Do watchmen need a special app?",
-      answer: "No, our watchman interface is web-based and optimized for any smartphone or tablet. They simply log in via their browser without needing to install anything."
-    },
-    {
       id: "faq2",
       question: "Can owners see only their office?",
       answer: "Yes, the role-based access system ensures that Office Owners can only view visitor data and alerts specific to their assigned offices."

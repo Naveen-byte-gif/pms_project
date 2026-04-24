@@ -1,49 +1,78 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import styles from "@/styles/modules/Header.module.css";
+import Link from "next/link";
 
 export default function Header() {
-  const pathname = usePathname();
-  
-  // Format the title based on the pathname
-  const getTitleInfo = () => {
-    if (pathname.includes('/dashboard')) return { pre: "WELCOME BACK, ADMIN USER", title: "Admin Dashboard" };
-    if (pathname.includes('/offices')) return { pre: "4 REGISTERED", title: "Offices" };
-    if (pathname.includes('/watchmen')) return { pre: "5 REGISTERED", title: "Watchmen" };
-    if (pathname.includes('/visitors')) return { pre: "3 CURRENTLY INSIDE", title: "Visitors" };
-    return { pre: "", title: "Admin" };
-  };
-
-  const { pre, title } = getTitleInfo();
-
   return (
-    <header className="bg-white border-bottom px-4 py-3 d-flex align-items-center justify-content-between position-sticky top-0" style={{ zIndex: 999 }}>
-      <div>
-        <p className="mb-0 text-primary fw-bold small text-uppercase" style={{ letterSpacing: '0.05em', fontSize: '0.7rem' }}>{pre}</p>
-        <h1 className="m-0 fw-bold text-dark" style={{ fontSize: '1.5rem', letterSpacing: '-0.02em' }}>{title}</h1>
+    <header className={styles.header}>
+      {/* Left: Tenant Switcher */}
+      <div className="d-flex align-items-center gap-3">
+        <div className={styles.tenantSwitcher}>
+          <i className="bi bi-geo-alt-fill text-primary"></i>
+          <span>Global Properties (All Regions)</span>
+          <i className="bi bi-chevron-down ms-1 small text-muted"></i>
+        </div>
       </div>
       
-      <div className="d-flex align-items-center gap-4">
-        {/* Search */}
-        <div className="position-relative d-none d-md-block">
-          <i className="bi bi-search position-absolute top-50 translate-middle-y text-muted" style={{ left: '1rem' }}></i>
-          <input 
-            type="text" 
-            className="form-control bg-light border-0 rounded-pill" 
-            placeholder="Search..." 
-            style={{ paddingLeft: '2.5rem', width: '250px' }}
-          />
+      {/* Middle: Global Search */}
+      <div className={styles.searchContainer}>
+        <i className={`bi bi-search ${styles.searchIcon}`}></i>
+        <input 
+          type="text" 
+          className={styles.searchInput} 
+          placeholder="Search properties, tenants, or visitors..." 
+        />
+      </div>
+
+      {/* Right: Actions */}
+      <div className={styles.actions}>
+        <div className="dropdown">
+          <button className={styles.quickAction} type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i className="bi bi-plus-lg"></i>
+            <span>Quick Action</span>
+          </button>
+          <ul className="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-xl mt-2 p-2">
+            <li>
+              <Link className="dropdown-item rounded-lg py-2" href="/admin/properties?action=add">
+                <i className="bi bi-building me-2"></i>Add Property
+              </Link>
+            </li>
+            <li>
+              <Link className="dropdown-item rounded-lg py-2" href="/admin/helpdesk?action=add">
+                <i className="bi bi-ticket-perforated me-2"></i>Create Ticket
+              </Link>
+            </li>
+            <li>
+              <Link className="dropdown-item rounded-lg py-2" href="/admin/people?action=add">
+                <i className="bi bi-person-plus me-2"></i>Invite User
+              </Link>
+            </li>
+          </ul>
         </div>
-        
-        {/* Notifications */}
-        <button className="btn btn-link text-muted p-0 position-relative hover-text-dark">
-          <i className="bi bi-bell fs-5"></i>
-          <span className="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-            <span className="visually-hidden">New alerts</span>
-          </span>
-        </button>
 
-
+        <div className="d-flex align-items-center gap-2">
+          <button className={styles.actionButton}>
+            <i className="bi bi-bell fs-5"></i>
+            <span className={styles.badge}></span>
+          </button>
+          
+          <button className={styles.actionButton}>
+            <i className="bi bi-question-circle fs-5"></i>
+          </button>
+          
+          <div className="ms-2 ps-3 border-start">
+            <div className="d-flex align-items-center gap-2">
+              <div className="text-end d-none d-xl-block">
+                <p className="mb-0 fw-bold small" style={{ lineHeight: 1.2 }}>Admin User</p>
+                <p className="mb-0 text-muted small" style={{ fontSize: '0.7rem' }}>Super Admin</p>
+              </div>
+              <div className={styles.actionButton} style={{ background: 'var(--bg-app)' }}>
+                <i className="bi bi-person-fill"></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   );

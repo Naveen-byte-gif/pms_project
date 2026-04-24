@@ -12,7 +12,7 @@ export default function DashboardLayout({
       <Sidebar />
       
       {/* Main Content Area */}
-      <div className="flex-grow-1" style={{ marginLeft: '260px' }}>
+      <div className="flex-grow-1" style={{ marginLeft: '280px' }}>
         <Header />
         <main className="p-4">
           {children}
